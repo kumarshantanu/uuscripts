@@ -1,6 +1,6 @@
 # uuscripts
 
-_Unix Utility Scripts for Java and Clojure development_
+Unix Utility Scripts for Java and Clojure development
 
 ## Usage
 
