@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Start Tomcat in debug mode
+#
+
 if [ -z "$TOMCAT_HOME" ]; then
   echo "You must define TOMCAT_HOME"
   exit 1;

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Shutdown Tomcat if possible, kill -9 otherwise
+#
+
 if [ -z "$TOMCAT_HOME" ]; then
   echo "You must define TOMCAT_HOME"
   exit 1;
