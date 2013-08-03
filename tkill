@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [ -z "$TOMCAT_HOME" ]; then
+  echo "You must define TOMCAT_HOME"
+  exit 1;
+fi
+
+# attempt a normal shutdown
+"$TOMCAT_HOME/bin/shutdown.sh"
+
+echo Sleeping for 5 seconds
+sleep 5
+
+p=`ps aux | grep -i tomcat | grep -i java | awk '{ print $2; }'`
+if [ -n "$p" ]; then
+  echo Tomcat alive, killing it with -9
+  kill -9 $p
+fi
+

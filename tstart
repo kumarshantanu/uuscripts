@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -z "$TOMCAT_HOME" ]; then
+  echo "You must define TOMCAT_HOME"
+  exit 1;
+fi
+
+export JPDA_ADDRESS=8000
+export JPDA_TRANSPORT=dt_socket
+"$TOMCAT_HOME/bin/catalina.sh" jpda start
+

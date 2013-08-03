@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ -z "$TOMCAT_HOME" ]; then
+  echo "You must define TOMCAT_HOME"
+  exit 1;
+fi
+
+echo Sleeping for 5 seconds
+sleep 5
+
+tail -f $TOMCAT_HOME/logs/*
+
