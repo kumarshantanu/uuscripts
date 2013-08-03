@@ -5,7 +5,7 @@
 #
 
 if [ -z "$TOMCAT_HOME" ]; then
-  echo "You must define TOMCAT_HOME"
+  echo "You must define TOMCAT_HOME" 1>&2
   exit 1;
 fi
 
