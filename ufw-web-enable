@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [[ $UID -ne 0 ]]; then
+  echo "$0 must be run as root" 1>&2
+  exit 1
+fi
+
+if [ -z "`which ufw`" ]; then
+  echo "Must install 'ufw' first: sudo apt-get install ufw" 1>&2
+  exit 1
+fi
+
+ufw allow ssh
+ufw allow http
+ufw enable
+
