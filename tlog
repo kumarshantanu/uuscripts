@@ -12,5 +12,5 @@ fi
 echo Sleeping for 5 seconds
 sleep 5
 
-tail -f $TOMCAT_HOME/logs/*
+tail --lines=50 -f $TOMCAT_HOME/logs/*
 
