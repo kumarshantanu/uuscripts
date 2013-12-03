@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  echo "Syntax: $0 [dirname] part_of_filename"
+  exit 1
+fi
+
+needle=$2
+haystack=$1
+if [ -z "$2" ]; then
+  needle=$1
+  haystack=.
+fi
+
+find $haystack | grep --color=auto -i $needle
+
