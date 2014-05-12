@@ -12,5 +12,10 @@ fi
 echo Sleeping for 5 seconds
 sleep 5
 
-tail -50f $TOMCAT_HOME/logs/*
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  tail --lines=50 -f $TOMCAT_HOME/logs/*
+else
+  tail -50f $TOMCAT_HOME/logs/*
+fi
 
