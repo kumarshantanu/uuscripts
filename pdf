@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Convert documents to PDF (subject to pandoc support)
+
+# You must have 'pandoc' and 'pdflatex' packages installed.
+# Mac OS X:
+# - Install 'pandoc' using HomeBrew:     brew install pandoc
+# - Download and install MacTex package: https://tug.org/mactex/
+# Ubuntu:
+# - Install both packages using apt-get: sudo apt-get install pandoc texlive-full
+
+function abort {
+  echo "$1" 1>&2
+  exit 1
+}
+
+function abortIfAbsent {
+  which $1 > /dev/null || abort "Executable '$1' not found in \$PATH. See $0 for details."
+}
+
+abortIfAbsent "pandoc"
+abortIfAbsent "pdflatex"
+
+if [ -z "$1" ]; then
+  abort "Must specify input filename as first argument"
+fi
+
+fullpath="$1"
+fullname="${fullpath##*/}"
+f_extn="${fullname##*.}"
+f_name="${fullname%.*}"
+
+case `echo $f_extn | awk '{print tolower($0)}'` in # make lower-case, then compare
+md)
+  f_extn="markdown"
+  ;;
+esac
+
+cat "$1" | pandoc --from=$f_extn --to=pdf -t latex -o "$f_name.pdf"
