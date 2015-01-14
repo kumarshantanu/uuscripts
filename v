@@ -15,7 +15,7 @@ if [ -d "$FILE_OR_DIR" ]; then
   fi
   ls $COLOR -l "$@"
 elif [ -f "$FILE_OR_DIR" ]; then
-  less "$@"
+  view "$@"
 else
   echo "$FILE_OR_DIR is neither directory not file" 1>&2
   exit 1
