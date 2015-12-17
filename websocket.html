@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <script>
+      function getParameterByName(name) {
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+              results = regex.exec(location.search);
+          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      function init() {
+        var host = getParameterByName('host');
+        if (host == '') {
+            host = "localhost";
+        }
+        var port = getParameterByName('port');
+        if (port == '') {
+            port = "8080";
+        }
+        var pdiv = document.getElementById("current_config");
+        pdiv.innerHTML = '<h2>Current config - Host: <font color="red"><code>' + host +
+          '</code></font>, Port: <font color="red"><code>' + port + '</code></font></h2>';
+
+        var ws = new WebSocket('ws://' + host + ':' + port + '/');
+
+        ws.onmessage = function(event) {
+          console.log('' + event.data);
+        };
+      };
+    </script>
+    <style type="text/css">
+      td, th {
+        border: 1px solid black;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      table tr td:empty {
+        width: 50px;
+      }
+      table tr th:empty {
+        width: 50px;
+      }
+      table tr th {
+        padding-top:    10px;
+        padding-bottom: 10px;
+        padding-left:   10px;
+        padding-right:  10px;
+      }
+      table tr td {
+        padding-top:    10px;
+        padding-bottom: 10px;
+        padding-left:   10px;
+        padding-right:  10px;
+      }
+    </style>
+  </head>
+  <body onload="init()">
+    <div align='center'>
+      <h1>See console</h1>
+      <table>
+        <tr>
+          <th></th><th>Windows and Linux</th><th>Mac</th>
+        </tr>
+        <tr>
+          <td>Chrome</td><td>Ctrl + Shift + J</td><td>Cmd + Option + J</td>
+        </tr>
+        <tr>
+          <td>Firefox</td><td>Ctrl + Shift + K</td><td>Cmd + Option + K</td>
+        </tr>
+      </table>
+    </div>
+    <div align='center' id='current_config'></div>
+    <div align='center'><h2>Specify <code>?host=&lt;hostname&gt;&amp;port=&lt;port&gt;</code> to override</h2></div>
+    <div align='center'>
+      <i>This is a browser-based viewer for Websocket streams.</i>
+    </div>
+    <div align='center'><i><a href='http://websocketd.com/'>http://websocketd.com/</a></i></div>
+  </body>
+</html>
