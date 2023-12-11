@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+  echo Usage: $0 \"query term\" 1>&2
+  exit 1
+fi
+grep --color=auto -ril "$1" *
+
