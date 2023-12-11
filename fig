@@ -12,5 +12,4 @@ if [ -z "$2" ]; then
   haystack=.
 fi
 
-find $haystack | grep --color=auto -i $needle
-
+find $haystack ! -path "${FIG_EXCLUDE:-*/node_modules/*}" | grep --color=auto -i $needle
