@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+##
+# Install ipykernel for "jupyter notebook" including current virtual-env
+#
+# Without this, jupyter may not see the virtual-env dependencies
+#
+
+penv install ipykernel
+
+# Wrap env var in single quote to defer expansion
+# until pipenv sets env var and runs the command
+penv run python -m ipykernel install --user --name='$PIPENV_CUSTOM_VENV_NAME'
+

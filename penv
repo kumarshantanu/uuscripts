@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+##
+# penv: - Python project env tool
+#       - A shortcut for `pipenv`
+#       - Makes virtualenv-name explicit
+# Ref: https://stackoverflow.com/a/74519890 (Activate specifically named virtualenv with pipenv)
+# Ref: https://stackoverflow.com/a/47296960 (pipenv with Jupyter Notebook)
+
+set -e
+#set -x
+
+venvNameFile="venv_name.txt"
+pipenvExec="pipenv"
+
+function err {
+  printf >&2 "[penv] $1\n"
+}
+
+function findVirtualEnvName() {
+  if [ -f "$venvNameFile" ]; then
+    cat $venvNameFile
+  else
+    false
+  fi
+}
+
+function launchPipenv() {
+  local virtualEnvName="$(findVirtualEnvName)"
+  if [ -z "$virtualEnvName" ]; then
+    err "ERROR: File $venvNameFile is missing. Create as follows (e.g.):\n\techo $(basename $(pwd)) > $venvNameFile"
+    exit 1
+  else
+    PIPENV_CUSTOM_VENV_NAME="$virtualEnvName" pipenv "$@"
+  fi
+}
+
+launchPipenv "$@"
