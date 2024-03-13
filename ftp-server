@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pip install pyftpdlib
+python -m pyftpdlib -w -p 2100
+
