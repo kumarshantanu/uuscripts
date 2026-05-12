@@ -11,13 +11,13 @@ fi
 
 function nodeRepl {
   clj \
-    -Sdeps '{:deps {org.clojure/clojurescript {:mvn/version "1.12.42"}}}' \
+    -Sdeps '{:deps {org.clojure/clojurescript {:mvn/version "1.12.145"}}}' \
     -M -m cljs.main --repl-env node
 }
 
 function browserRepl {
   clj \
-    -Sdeps '{:deps {org.clojure/clojurescript {:mvn/version "1.12.42"}}}' \
+    -Sdeps '{:deps {org.clojure/clojurescript {:mvn/version "1.12.145"}}}' \
     -M --main cljs.main --repl-opts "{:launch-browser false}" --repl
 }
 
