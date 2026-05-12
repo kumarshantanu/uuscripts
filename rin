@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
 if [ -z "$1" ]; then
-  echo Usage: $0 \"query term\" 1>&2
+  echo Usage: $0 [..grep-opts..] \"query term\" 1>&2
   exit 1
 fi
-grep --color=auto -rin "$1" *
+user_opt="${@:1:(($#-1))}"
+last_arg="${@: -1}" # so that user can insert options
+if [ "$user_opt" = "$last_arg" ]; then
+  user_opt=""
+fi
+echo "user_opt=$user_opt"
+echo "last_arg=$last_arg"
+grep --color=auto $user_opt -rin "$last_arg" *
 
